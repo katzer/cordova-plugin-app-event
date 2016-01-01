@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/cordova-plugin-app-event.svg)](http://badge.fury.io/js/cordova-plugin-app-event)
+
 Cordova App-Event Plugin
 ========================
 
