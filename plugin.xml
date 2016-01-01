@@ -30,7 +30,7 @@
 
     <name>Application Events</name>
     <description>Broadcasts various events to make them available for 3rd parties</description>
-    <keywords>appplant didRegisterUserNotificationSettings didReceiveLocalNotification didFinishLaunchingWithOptions</keywords>
+    <keywords>appplant UIApplicationDelegate didRegisterUserNotificationSettings didReceiveLocalNotification didFinishLaunchingWithOptions</keywords>
     <repo>https://github.com/katzer/cordova-plugin-app-delegate.git</repo>
     <license>Apache 2.0</license>
     <author>Sebastián Katzer</author>
