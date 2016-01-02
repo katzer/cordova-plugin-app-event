@@ -86,7 +86,7 @@
     [center addObserver:self
                selector:selector
                    name:event
-                 object:nil];
+                 object:object];
 }
 
 @end
