@@ -54,18 +54,15 @@
     // This actually calls the original method
     [self swizzled_pluginInitialize];
 
-    [self addObserver:self
-             selector:NSSelectorFromString(@"didReceiveLocalNotification:")
+    [self addObserver:NSSelectorFromString(@"didReceiveLocalNotification:")
                  name:CDVLocalNotification
                object:NULL];
 
-    [self addObserver:self
-             selector:NSSelectorFromString(@"didFinishLaunchingWithOptions:")
+    [self addObserver:NSSelectorFromString(@"didFinishLaunchingWithOptions:")
                  name:UIApplicationDidFinishLaunchingNotification
                object:NULL];
 
-    [self addObserver:self
-             selector:NSSelectorFromString(@"didRegisterUserNotificationSettings:")
+    [self addObserver:NSSelectorFromString(@"didRegisterUserNotificationSettings:")
                  name:UIApplicationRegisterUserNotificationSettings
                object:NULL];
 }
@@ -76,8 +73,7 @@
 /**
  * Register an observer if the caller responds to it.
  */
-- (void) addObserver:(id)observer
-            selector:(SEL)selector
+- (void) addObserver:(SEL)selector
                 name:(nullable NSString*)event
               object:(nullable id)object
 {
