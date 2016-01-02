@@ -24,23 +24,25 @@
 #import "CDVPlugin+APPAppEvent.h"
 #import "AppDelegate+APPAppEvent.h"
 
+#import <objc/runtime.h>
+
 @implementation CDVPlugin (APPAppEvent)
+
+static IMP orig_pluginInitialize;
 
 #pragma mark -
 #pragma mark Life Cycle
 
 /**
  * Its dangerous to override a method from within a category.
- * Instead we will use method swizzling. we set this up in the load call.
+ * Instead we will use method swizzling.
  */
 + (void) initialize
 {
     if ([NSStringFromClass(self) hasPrefix:@"CDV"])
         return;
 
-    [AppDelegate exchange_methods:@selector(pluginInitialize)
-                         swizzled:@selector(swizzled_pluginInitialize)
-                            class:self];
+    orig_pluginInitialize = [self exchange_init_methods];
 }
 
 #pragma mark -
@@ -49,10 +51,12 @@
 /**
  * Registers obervers after plugin was initialized.
  */
-- (void) swizzled_pluginInitialize
+void swizzled_pluginInitialize(id self, SEL _cmd)
 {
-    // This actually calls the original method
-    [self swizzled_pluginInitialize];
+    if (orig_pluginInitialize != NULL) {
+        ((void(*)(id, SEL))orig_pluginInitialize)(self, _cmd);
+        orig_pluginInitialize = NULL;
+    }
 
     [self addObserver:NSSelectorFromString(@"didReceiveLocalNotification:")
                  name:CDVLocalNotification
@@ -69,6 +73,18 @@
 
 #pragma mark -
 #pragma mark Core
+
+/**
+ * Exchange the method implementations for pluginInitialize
+ * and return the original implementation.
+ */
++ (IMP) exchange_init_methods
+{
+    IMP swizzleImp = (IMP) swizzled_pluginInitialize;
+    Method origImp = class_getInstanceMethod(self, @selector(pluginInitialize));
+
+    return method_setImplementation(origImp, swizzleImp);
+}
 
 /**
  * Register an observer if the caller responds to it.

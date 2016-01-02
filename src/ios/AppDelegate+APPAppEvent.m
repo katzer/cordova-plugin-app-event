@@ -34,7 +34,7 @@ NSString* const UIApplicationRegisterUserNotificationSettings = @"UIApplicationR
 
 /**
  * Its dangerous to override a method from within a category.
- * Instead we will use method swizzling. we set this up in the load call.
+ * Instead we will use method swizzling.
  */
 + (void) load
 {
@@ -90,18 +90,10 @@ NSString* const UIApplicationRegisterUserNotificationSettings = @"UIApplicationR
  */
 + (void) exchange_methods:(SEL)original swizzled:(SEL)swizzled
 {
-    [self exchange_methods:original swizzled:swizzled class:self];
-}
+    class_addMethod(self, original, (IMP) defaultMethodIMP, "v@:");
 
-/**
- * Exchange the method implementations.
- */
-+ (void) exchange_methods:(SEL)original swizzled:(SEL)swizzled class:(Class)cls
-{
-    class_addMethod(cls, original, (IMP) defaultMethodIMP, "v@:");
-
-    Method original_method = class_getInstanceMethod(cls, original);
-    Method swizzled_method = class_getInstanceMethod(cls, swizzled);
+    Method original_method = class_getInstanceMethod(self, original);
+    Method swizzled_method = class_getInstanceMethod(self, swizzled);
 
     method_exchangeImplementations(original_method, swizzled_method);
 }

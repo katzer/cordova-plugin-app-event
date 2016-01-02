@@ -27,6 +27,4 @@ extern NSString* const UIApplicationRegisterUserNotificationSettings;
 
 @interface AppDelegate (APPAppEvent)
 
-+ (void) exchange_methods:(SEL)original swizzled:(SEL)swizzled class:(Class)cls;
-
 @end
