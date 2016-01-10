@@ -83,7 +83,11 @@ void swizzled_pluginInitialize(id self, SEL _cmd)
     IMP swizzleImp = (IMP) swizzled_pluginInitialize;
     Method origImp = class_getInstanceMethod(self, @selector(pluginInitialize));
 
-    return method_setImplementation(origImp, swizzleImp);
+    if (method_getImplementation(origImp) != swizzleImp) {
+        return method_setImplementation(origImp, swizzleImp);
+    }
+
+    return NULL;
 }
 
 /**
