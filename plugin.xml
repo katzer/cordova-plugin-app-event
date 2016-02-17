@@ -47,6 +47,8 @@
 
         <header-file src="src/ios/CDVPlugin+APPAppEvent.h" />
         <source-file src="src/ios/CDVPlugin+APPAppEvent.m" />
+
+        <header-file src="src/ios/APPAppEventDelegate.h" />
     </platform>
 
 </plugin>

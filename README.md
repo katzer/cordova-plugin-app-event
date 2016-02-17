@@ -15,6 +15,7 @@ As of right now its possible to add observers for these events:
 
 ## Usage
 
+#### 1. Add and install the plugin as an dependency
 Once you have added the plugin as an dependency you can add observers for them.
 
 ```xml
@@ -23,6 +24,27 @@ Once you have added the plugin as an dependency you can add observers for them.
 <dependency id="cordova-plugin-app-event" />
 ```
 
+#### 2. Add the protocol to the plugin's interface
+As first the plugin needs to indicate interest to receivce app events by adding the `APPAppEventDelegate` protocol.
+
+__Note:__ Required for version 1.2.0 or newer!
+
+```obj-c
+// MyCordovaPlugin.h
+
+#import "APPAppEventDelegate.h"
+#import <Cordova/CDVPlugin.h>
+
+@interface APPLocalNotification : CDVPlugin <APPAppEventDelegate>
+
+@implementation MyCordovaPlugin
+
+...
+
+@end
+```
+
+#### 3. Add implementations for the delegated events
 To add an observer you need to implement the [UIApplicationDelegate Protocol][app_delegate_protocol]. Implementations from your _AppDelegate_ class don't get overwritten!
 
 For the `didReceiveLocalNotification` event you would need to add that method.

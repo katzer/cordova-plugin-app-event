@@ -21,6 +21,7 @@
  * @APPPLANT_LICENSE_HEADER_END@
  */
 
+#import "APPAppEventDelegate.h"
 #import "CDVPlugin+APPAppEvent.h"
 #import "AppDelegate+APPAppEvent.h"
 
@@ -39,10 +40,12 @@ static IMP orig_pluginInitialize;
  */
 + (void) initialize
 {
-    if ([NSStringFromClass(self) hasPrefix:@"CDV"])
-        return;
+    // To keep compatibility with local-notifiations v0.8.4
+    if ([NSStringFromClass(self) isEqualToString:@"APPLocalNotification"]
+        || [self conformsToProtocol:@protocol(APPAppEventDelegate)]) {
 
-    orig_pluginInitialize = [self exchange_init_methods];
+        orig_pluginInitialize = [self exchange_init_methods];
+    }
 }
 
 #pragma mark -
