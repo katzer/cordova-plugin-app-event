@@ -106,7 +106,7 @@ void defaultMethodIMP (id self, SEL _cmd) { /* nothing to do here */ }
 /**
  * Broadcasts the notification to all listeners.
  */
-- (void) postNotificationName:(NSString*)aName object:(nullable id)anObject
+- (void) postNotificationName:(NSString*)aName object:(id)anObject
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:aName
                                                         object:anObject];

@@ -97,8 +97,8 @@ void swizzled_pluginInitialize(id self, SEL _cmd)
  * Register an observer if the caller responds to it.
  */
 - (void) addObserver:(SEL)selector
-                name:(nullable NSString*)event
-              object:(nullable id)object
+                name:(NSString*)event
+              object:(id)object
 {
     if (![self respondsToSelector:selector])
         return;
