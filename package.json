@@ -19,6 +19,12 @@
     "cordova",
     "ecosystem:cordova"
   ],
+  "cordova": {
+    "id": "cordova-plugin-app-event",
+    "platforms": [
+      "ios"
+    ]
+  },
   "platforms": [
     "ios"
   ],
