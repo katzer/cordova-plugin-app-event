@@ -76,7 +76,7 @@ For the `didReceiveLocalNotification` event you would need to add that method.
 
 This software is released under the [Apache 2.0 License][apache2_license].
 
-© 2013-2016 appPlant UG, Inc. All rights reserved
+© 2013-2017 appPlant GmbH, Inc. All rights reserved
 
 
 [local_notification_plugin]: https://github.com/katzer/cordova-plugin-local-notifications
