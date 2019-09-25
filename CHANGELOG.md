@@ -1,6 +1,9 @@
 ChangeLog
 ---------
 
+#### Version 1.2.2 (25.09.2019)
+- Fix breaks on cordova-ios 5.x
+
 #### Version 1.2.1 (28.08.2017)
 - Fix Package.json not found Cordova 7.0
 
