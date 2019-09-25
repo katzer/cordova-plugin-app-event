@@ -22,6 +22,8 @@
  */
 
 #import "AppDelegate+APPAppEvent.h"
+#import "CDVPlugin+APPAppEvent.h"
+
 #import <Availability.h>
 #import <objc/runtime.h>
 
